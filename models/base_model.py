@@ -6,6 +6,7 @@
 
 import datetime
 import uuid
+import models
 
 
 class BaseModel():
@@ -22,6 +23,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """return a string representation of the class"""
@@ -31,6 +33,7 @@ class BaseModel():
     def save(self):
         """modifies the updated_at attr"""
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """retrun a modified dict"""
