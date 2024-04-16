@@ -4,6 +4,8 @@
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+import os
+import json
 
 class TestFileStorage(unittest.TestCase):
     """Test cases for FileStorage class."""
@@ -46,6 +48,19 @@ class TestFileStorage(unittest.TestCase):
         key = f"BaseModel.{obj.id}"
         self.assertIn(key, new_storage._FileStorage__objects)
         self.assertIsInstance(new_storage._FileStorage__objects[key], BaseModel)
+
+   def test_all(self):
+    """Test the all() method returns the correct dictionary of objects."""
+    obj1 = BaseModel()
+    obj2 = BaseModel()
+    self.storage.new(obj1)
+    self.storage.new(obj2)
+    all_objects = self.storage.all()
+    self.assertIsInstance(all_objects, dict)
+    self.assertEqual(len(all_objects), 2)
+    self.assertIn(f"BaseModel.{obj1.id}", all_objects)
+    self.assertIn(f"BaseModel.{obj2.id}", all_objects)
+
 
 if __name__ == '__main__':
     unittest.main()
