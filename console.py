@@ -22,19 +22,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         'create new class'
-    args = arg.split()
-    if len(args) == 0:
-        print("** class name missing **")
-        return
-    class_name = args[0]
-    try:
-        cls = globals()[class_name]
-    except KeyError:
-        print("** class doesn't exist **")
-        return
-    instance = cls()
-    instance.save()
-    print(instance.id)
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        try:
+            cls = globals()[class_name]
+        except KeyError:
+            print("** class doesn't exist **")
+            return
+        instance = cls()
+        instance.save()
+        print(instance.id)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
