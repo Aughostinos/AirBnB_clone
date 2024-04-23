@@ -2,6 +2,7 @@
 """contains the entry point of the command interpreter"""
 import cmd
 import sys
+import models
 from models.base_model import BaseModel
 from models.__init__ import storage
 
@@ -39,7 +40,8 @@ class HBNBCommand(cmd.Cmd):
         print(instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of an
+        instance based on the class name and id"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -54,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** class doesn't exist **")
             return
-        
+
         class_name_id = '{}.{}'.format(class_name, class_id)
         dic_obj = models.storage.all()
 
