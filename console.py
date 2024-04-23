@@ -54,9 +54,12 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** class doesn't exist **")
             return
+        
         class_name_id = '{}.{}'.format(class_name, class_id)
-        if class_name_id in models.storage.all():
-            print(models.storage.all()[class_name_id])
+        dic_obj = models.storage.all()
+
+        if class_name_id in dic_obj:
+            print(dic_obj[class_name_id])
         else:
             print("** no instance found **")
 
