@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         class_name_id = '{}.{}'.format(class_name, class_id)
         dic_obj = models.storage.all()
 
-        if class_name_id not in dic_obj:
+        if class_name_id in dic_obj:
             dic_obj.pop(class_name_id)
             models.storage.save()
         else:
