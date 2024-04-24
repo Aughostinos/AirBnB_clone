@@ -65,6 +65,33 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
+    def do_destroy(self, arg):
+        """Prints the string representation of an
+        instance based on the class name and id"""
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        class_name = args[0]
+        class_id = args[1]
+        try:
+            cls = globals()[class_name]
+        except KeyError:
+            print("** class doesn't exist **")
+            return
+
+        class_name_id = '{}.{}'.format(class_name, class_id)
+        dic_obj = models.storage.all()
+
+        if class_name_id not in dic_obj:
+            dic_obj.pop(class_name_id)
+            models.storage.save()
+        else:
+            print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
