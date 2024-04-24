@@ -112,6 +112,45 @@ class HBNBCommand(cmd.Cmd):
             for key, value in dic_obj.items():
                 print(value)
 
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id"""
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+        class_name = args[0]
+        class_id = args[1]
+        attribute_name = args[2]
+        attribute_value = args[3]
+        try:
+            cls = globals()[class_name]
+        except KeyError:
+            print("** class doesn't exist **")
+            return
+
+        class_name_id = '{}.{}'.format(class_name, class_id)
+        dic_obj = models.storage.all()
+
+        if class_name_id not in dic_obj:
+            print("** no instance found **")
+            return
+        instance = dic_obj[class_name_id]
+        if hasattr(instance, attribute_name) and /
+        attribute_name not in ['id', 'created_at', 'updated_at']:
+            attr_type = type(getattr(instance, attribute_name, str))
+            casted_value = attr_type(attribute_value)
+            setattr(instance, attribute_name, casted_value)
+            models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
