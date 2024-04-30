@@ -146,9 +146,7 @@ class HBNBCommand(cmd.Cmd):
         instance = dic_obj[class_name_id]
         if hasattr(instance, attribute_name) and attribute_name not in ['id', 'created_at', 'updated_at']:
             attr_type = type(getattr(instance, attribute_name, str))
-            casted_value = attr_type(attribute_value)
-        else:
-            return
+            attribute_value = attr_type(attribute_value)
             
         setattr(instance, attribute_name, casted_value)
         models.storage.save()
