@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             attr_type = type(getattr(instance, attribute_name, str))
             attribute_value = attr_type(attribute_value)
             
-        setattr(instance, attribute_name, casted_value)
+        setattr(instance, attribute_name, attribute_value)
         models.storage.save()
 
 
