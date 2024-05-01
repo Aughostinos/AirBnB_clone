@@ -3,8 +3,5 @@
 
 from models.user import User
 
-
-def test_attribute(user, attribute, expected):
-    actual = getattr(user, attribute)
-    assert actual == expected, f"Test Failed: User.{attribute} is '{actual}' but expected '{expected}'"
-    return "OK"
+user = User(email="test@example.com")
+assert user.email == "test@example.com", "Test Failed: User.email not initialized correctly"
