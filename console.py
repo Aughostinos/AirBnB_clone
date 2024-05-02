@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         """ Prints all string representation of all
         instances based or not on the class name"""
         if ".all()" in arg:
-            class_name = input_line.split(".")[0]
+            class_name = arg.split(".")[0]
         else:
             args = arg.split()
             if len(args) > 0:
@@ -116,8 +116,6 @@ class HBNBCommand(cmd.Cmd):
         dic_obj = models.storage.all()
         for key, value in dic_obj.items():
             if isinstance(value, cls):
-                print(value)
-            else:
                 print(value)
 
     def do_update(self, arg):
