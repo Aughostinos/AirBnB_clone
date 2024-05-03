@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in dic_obj.items():
                 if isinstance(value, cls):
                     print(value)
-        elif:
+        else:
             args = arg.split()
             if len(args) > 0:
                 class_name = args[0]
