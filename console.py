@@ -103,20 +103,32 @@ class HBNBCommand(cmd.Cmd):
         instances based or not on the class name"""
         if ".all()" in arg:
             class_name = arg.split(".")[0]
-        else:
+            try:
+                cls = globals()[class_name]
+            except KeyError:
+                print("** class doesn't exist **")
+                return
+            dic_obj = models.storage.all()
+            for key, value in dic_obj.items():
+                if isinstance(value, cls):
+                    print(value)
+        elif:
             args = arg.split()
             if len(args) > 0:
                 class_name = args[0]
-         
-        try:
-            cls = globals()[class_name]
-        except KeyError:
-            print("** class doesn't exist **")
-            return
-        dic_obj = models.storage.all()
-        for key, value in dic_obj.items():
-            if isinstance(value, cls):
-                print(value)
+                try:
+                    cls = globals()[class_name]
+                except KeyError:
+                    print("** class doesn't exist **")
+                    return
+                dic_obj = models.storage.all()
+                for key, value in dic_obj.items():
+                    if isinstance(value, cls):
+                        print(value)
+            else:
+                dic_obj = models.storage.all()
+                for value in dic_obj.values():
+                    print(value)
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
