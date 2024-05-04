@@ -98,16 +98,29 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-    def default(self, line):
-        """Handle commands that do not match any known commands."""
-        parts = line.split(".")
-        if len(parts) == 2 and parts[1] == "all()":
-            self.do_all(parts[0])
+    def parsing(self, line):
+        """parse complex commands"""
+        args = line.split(".")
+        if len(args) == 2:
+            if args[1] == "all()":
+                self.do_all(args[0])
+            elif args[1] == "count()":
+                self.do_count([args[0]])
+
         else:
-            print("** Unknown syntax: {}".format(line))
+            pass
+    def do_count(self, arg=""):
+        """counts instances"""
+        try:
+            cls = globals()[arg]
+            count = sum(1 for _, instance in models.storage.all().items() if isinstance(instance, cls))
+            print(count)
+        except KeyError:
+            print("** class doesn't exist **")
 
     def do_all(self, arg=""):
-        """Prints all string representations of instances based or not on the class name."""
+        """Prints all string representations of instances 
+           based or not on the class name."""
         if arg:
             try:
                 cls = globals()[arg]
@@ -115,11 +128,10 @@ class HBNBCommand(cmd.Cmd):
                 if instances:
                     print(instances)
                 else:
-                    print("[]")  # No instances of the class found
+                    print("[]")  
             except KeyError:
                 print("** class doesn't exist **")
         else:
-            # Print all instances if no class name is provided
             instances = [str(v) for v in models.storage.all().values()]
             print(instances)
 
@@ -155,7 +167,8 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
         instance = dic_obj[class_name_id]
-        if hasattr(instance, attribute_name) and attribute_name not in ['id', 'created_at', 'updated_at']:
+        if (hasattr(instance, attribute_name) and 
+            attribute_name not in ['id', 'created_at', 'updated_at']):
             attr_type = type(getattr(instance, attribute_name, str))
             attribute_value = attr_type(attribute_value)
             
