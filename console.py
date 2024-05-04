@@ -98,37 +98,30 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-    def do_all(self, arg):
-        """ Prints all string representation of all
-        instances based or not on the class name"""
-        if ".all()" in arg:
-            class_name = arg.split(".")[0]
+    def default(self, line):
+        """Handle commands that do not match any known commands."""
+        parts = line.split(".")
+        if len(parts) == 2 and parts[1] == "all()":
+            self.do_all(parts[0])
+        else:
+            print("** Unknown syntax: {}".format(line))
+
+    def do_all(self, arg=""):
+        """Prints all string representations of instances based or not on the class name."""
+        if arg:
             try:
-                cls = globals()[class_name]
+                cls = globals()[arg]
+                instances = [str(v) for k, v in models.storage.all().items() if isinstance(v, cls)]
+                if instances:
+                    print(instances)
+                else:
+                    print("[]")  # No instances of the class found
             except KeyError:
                 print("** class doesn't exist **")
-                return
-            dic_obj = models.storage.all()
-            for key, value in dic_obj.items():
-                if isinstance(value, cls):
-                    print(value)
         else:
-            args = arg.split()
-            if len(args) > 0:
-                class_name = args[0]
-                try:
-                    cls = globals()[class_name]
-                except KeyError:
-                    print("** class doesn't exist **")
-                    return
-                dic_obj = models.storage.all()
-                for key, value in dic_obj.items():
-                    if isinstance(value, cls):
-                        print(value)
-            else:
-                dic_obj = models.storage.all()
-                for value in dic_obj.values():
-                    print(value)
+            # Print all instances if no class name is provided
+            instances = [str(v) for v in models.storage.all().values()]
+            print(instances)
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
