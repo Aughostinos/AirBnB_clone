@@ -9,7 +9,8 @@
 }
 
 .locations, .amenities {
-    display: inline;
+    background-color: white;
+    display: inline-block;
     height: 100%;
     width: 25%;
     vertical-align: middle;

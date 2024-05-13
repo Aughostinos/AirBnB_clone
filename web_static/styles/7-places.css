@@ -1,0 +1,29 @@
+.places{
+    display: block;
+    margin-top: 20px;
+    align-items: center;
+}
+
+h1{
+    font-size: 30px;
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+article{
+    display: inline-block;
+    width:390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ff5a5f;
+    border-radius: 4px;
+    align-items: center;
+    text-align: center;
+}
+
+h2{
+
+    font-size: 30px;
+    margin:auto;
+}
