@@ -4,8 +4,6 @@
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    display: flex;
-    align-items: center;
 }
 
 .locations, .amenities {
@@ -25,7 +23,7 @@
 
 .popover {
     list-style-type: none;
-    display: none;
+    visibility: hidden;
     background: #fafafa;
     width: 100%;
     border: 1px solid #DDDDDD;
@@ -33,6 +31,8 @@
     margin-left: -1px;
 	margin-top: 8px;
 	padding: 25px 0px;
+    display: block;
+    position: relative;
 }
 
 h2 {
@@ -62,7 +62,7 @@ ul {
 }
 
 .filters div:hover .popover {
-    display: inline-block;
+    visibility: visible;
 }
 .filters button {
     font-size: 18px;
@@ -72,11 +72,11 @@ ul {
     width: 20%;
     border: none;
     border-radius: 4px;
-    position: absolute;
-    right: 15%;
+    float: right;
+    margin-top: 12px;
+    margin-right: 25px;
 }
 
 .filters button:hover {
     opacity: 90%;
 }
-

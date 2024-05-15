@@ -1,7 +1,6 @@
 .places{
     display: block;
     margin-top: 20px;
-    align-items: center;
 }
 
 h1{
@@ -12,7 +11,8 @@ h1{
 }
 
 article{
-    display: inline-block;
+    display: block;
+    float: left;
     width:390px;
     padding: 20px;
     margin: 20px;
@@ -20,6 +20,7 @@ article{
     border-radius: 4px;
     align-items: center;
     text-align: center;
+
 }
 
 h2{
